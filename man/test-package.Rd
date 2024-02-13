@@ -8,6 +8,13 @@
 \description{
 The goal of demopkg is to practice making a package.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://mmadoliat.github.io/test/}
+}
+
+}
 \author{
 \strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 
