@@ -1,24 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://mmadoliat.github.io/test/404.html</loc>
-  </url>
-  <url>
-    <loc>https://mmadoliat.github.io/test/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://mmadoliat.github.io/test/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mmadoliat.github.io/test/reference/apa_t_pair.html</loc>
-  </url>
-  <url>
-    <loc>https://mmadoliat.github.io/test/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mmadoliat.github.io/test/reference/self_res_att.html</loc>
-  </url>
-  <url>
-    <loc>https://mmadoliat.github.io/test/reference/test-package.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://mmadoliat.github.io/test/404.html</loc></url>
+<url><loc>https://mmadoliat.github.io/test/authors.html</loc></url>
+<url><loc>https://mmadoliat.github.io/test/index.html</loc></url>
+<url><loc>https://mmadoliat.github.io/test/reference/apa_t_pair.html</loc></url>
+<url><loc>https://mmadoliat.github.io/test/reference/index.html</loc></url>
+<url><loc>https://mmadoliat.github.io/test/reference/new_dist.html</loc></url>
+<url><loc>https://mmadoliat.github.io/test/reference/rhclust.html</loc></url>
+<url><loc>https://mmadoliat.github.io/test/reference/self_res_att.html</loc></url>
 </urlset>
+
