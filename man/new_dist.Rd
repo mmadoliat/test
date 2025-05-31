@@ -6,10 +6,10 @@
 \usage{
 new_dist(
   name = NULL,
-  type = c("continous", "discrete"),
+  type = c("continuous", "discrete"),
   ddist = NULL,
   supp = NA,
-  cdist = NULL,
+  pdist = NULL,
   qdist = NULL,
   hdist = NULL,
   ...,
@@ -19,11 +19,11 @@ new_dist(
 \arguments{
 \item{name}{A name.}
 
-\item{type}{"continous" or "discrete".}
+\item{type}{"continuous" or "discrete".}
 
 \item{ddist}{density function.}
 
-\item{cdist}{cdf.}
+\item{pdist}{cdf.}
 
 \item{hdist}{hazard function.}
 
@@ -41,10 +41,10 @@ OOP.
 normal_density <- function(x, par1 = 0, par2 = 1) { dnorm(x, mean = par1, sd = par2) }
 normal_cdf <- function(x, par1 = 0, par2 = 1) { pnorm(x, mean = par1, sd = par2) }
 normal_hazard <- function(x, par1 = 0, par2 = 1) { normal_density(x, par1, par2) / ( 1 - normal_cdf(x, par1, par2) ) }
-x <- new_dist(name = "my.normal",  type = "continous", ddist = normal_density, supp = c(-Inf,Inf), cdist = normal_cdf, hdist = normal_hazard)
+x <- new_dist(name = "my.normal",  type = "continuous", ddist = normal_density, supp = c(-Inf,Inf), pdist = normal_cdf, hdist = normal_hazard)
 print(x)
 
-y <- new_dist(ddist=dexp, type="continous", name="exponential", supp=c(0,Inf))
+y <- new_dist(ddist=dexp, type="continuous", name="exponential", supp=c(0,Inf))
 plot(y,type="b",pch=16)
 
 z <- new_dist()

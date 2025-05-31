@@ -8,7 +8,7 @@
 #' @param type "continuous" or "discrete".
 #' @param ddist density function.
 #' @param support support.
-#' @param cdist cdf.
+#' @param pdist cdf.
 #' @param hdist hazard function.
 #' @return A dist class.
 #' @export
@@ -16,7 +16,7 @@
 #' normal_density <- function(x, par1 = 0, par2 = 1) { dnorm(x, mean = par1, sd = par2) }
 #' normal_cdf <- function(x, par1 = 0, par2 = 1) { pnorm(x, mean = par1, sd = par2) }
 #' normal_hazard <- function(x, par1 = 0, par2 = 1) { normal_density(x, par1, par2) / ( 1 - normal_cdf(x, par1, par2) ) }
-#' x <- new_dist(name = "my.normal",  type = "continuous", ddist = normal_density, supp = c(-Inf,Inf), cdist = normal_cdf, hdist = normal_hazard)
+#' x <- new_dist(name = "my.normal",  type = "continuous", ddist = normal_density, supp = c(-Inf,Inf), pdist = normal_cdf, hdist = normal_hazard)
 #' print(x)
 #'
 #' y <- new_dist(ddist=dexp, type="continuous", name="exponential", supp=c(0,Inf))
@@ -25,13 +25,13 @@
 #' z <- new_dist()
 #' plot(y+z,type="l",col=2)
 #' save(x,y,z, file="data/dist.rda")
-new_dist <- function(name=NULL, type=c("continuous","discrete"), ddist=NULL, supp=NA, cdist=NULL, qdist=NULL, hdist=NULL, ..., class = character()) {
+new_dist <- function(name=NULL, type=c("continuous","discrete"), ddist=NULL, supp=NA, pdist=NULL, qdist=NULL, hdist=NULL, ..., class = character()) {
   if (is.null(ddist)) {ddist <- dnorm; supp <- c(-Inf, Inf); type="continuous"; if (is.null(name)) name <- "Z-dist"}
-  if (is.null(cdist) && type=="continuous") {cdist <- Vectorize(function(x, ...) integrate(ddist, supp[1], x, ...)[[1]])}
-  if (is.null(qdist) && type=="continuous") {qdist <- Vectorize(inverse(function(x){cdist(x, ...)}))}
-  if (is.null(hdist) && type=="continuous") {hdist <- function(x, ...) ddist(x, ...)/(1-cdist(x, ...))}
+  if (is.null(pdist) && type=="continuous") {pdist <- Vectorize(function(x, ...) integrate(ddist, supp[1], x, ...)[[1]])}
+  if (is.null(qdist) && type=="continuous") {qdist <- Vectorize(inverse(function(x){pdist(x, ...)}))}
+  if (is.null(hdist) && type=="continuous") {hdist <- function(x, ...) ddist(x, ...)/(1-pdist(x, ...))}
   structure(
-    list(name=name, ddist=ddist, cdist=cdist, qdist=qdist, hdist=hdist, type=type, supp=supp, ...),
+    list(name=name, ddist=ddist, pdist=pdist, qdist=qdist, hdist=hdist, type=type, supp=supp, ...),
     class = c(class, "dist")
   )
 }
@@ -49,7 +49,7 @@ plot.dist <- function(x, ...) {
   qg <- seq(.0001,.9999,len=100)
   par(mfrow=c(2,2))
   try(plot(g,x$ddist(g), main=paste("density of", x$name), ...))
-  try(plot(g,x$cdist(g), main=paste("cdf of", x$name), ...))
+  try(plot(g,x$pdist(g), main=paste("cdf of", x$name), ...))
   try(plot(qg,x$qdist(qg), main=paste("quantile of", x$name), ...))
   try(plot(g,round(x$hdist(g),10), main=paste("hazard of", x$name), ...))
 }
