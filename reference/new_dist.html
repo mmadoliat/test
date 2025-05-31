@@ -42,10 +42,10 @@ OOP."></head><body>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_dist</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"continous"</span>, <span class="st">"discrete"</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"continuous"</span>, <span class="st">"discrete"</span><span class="op">)</span>,</span>
 <span>  ddist <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  supp <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  cdist <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pdist <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  qdist <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hdist <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
@@ -62,14 +62,14 @@ OOP."></head><body>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>"continous" or "discrete".</p></dd>
+<dd><p>"continuous" or "discrete".</p></dd>
 
 
 <dt id="arg-ddist">ddist<a class="anchor" aria-label="anchor" href="#arg-ddist"></a></dt>
 <dd><p>density function.</p></dd>
 
 
-<dt id="arg-cdist">cdist<a class="anchor" aria-label="anchor" href="#arg-cdist"></a></dt>
+<dt id="arg-pdist">pdist<a class="anchor" aria-label="anchor" href="#arg-pdist"></a></dt>
 <dd><p>cdf.</p></dd>
 
 
@@ -91,13 +91,13 @@ OOP."></head><body>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">normal_density</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">par1</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">par2</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="va">par1</span>, sd <span class="op">=</span> <span class="va">par2</span><span class="op">)</span> <span class="op">}</span></span></span>
 <span class="r-in"><span><span class="va">normal_cdf</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">par1</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">par2</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm</a></span><span class="op">(</span><span class="va">x</span>, mean <span class="op">=</span> <span class="va">par1</span>, sd <span class="op">=</span> <span class="va">par2</span><span class="op">)</span> <span class="op">}</span></span></span>
 <span class="r-in"><span><span class="va">normal_hazard</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">par1</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">par2</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span> <span class="fu">normal_density</span><span class="op">(</span><span class="va">x</span>, <span class="va">par1</span>, <span class="va">par2</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu">normal_cdf</span><span class="op">(</span><span class="va">x</span>, <span class="va">par1</span>, <span class="va">par2</span><span class="op">)</span> <span class="op">)</span> <span class="op">}</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_dist</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my.normal"</span>,  type <span class="op">=</span> <span class="st">"continous"</span>, ddist <span class="op">=</span> <span class="va">normal_density</span>, supp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,<span class="cn">Inf</span><span class="op">)</span>, cdist <span class="op">=</span> <span class="va">normal_cdf</span>, hdist <span class="op">=</span> <span class="va">normal_hazard</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_dist</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my.normal"</span>,  type <span class="op">=</span> <span class="st">"continuous"</span>, ddist <span class="op">=</span> <span class="va">normal_density</span>, supp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,<span class="cn">Inf</span><span class="op">)</span>, pdist <span class="op">=</span> <span class="va">normal_cdf</span>, hdist <span class="op">=</span> <span class="va">normal_hazard</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "my.normal is a continous distribution defined from -Inf to Inf."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "my.normal is a continuous distribution defined from -Inf to Inf."</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">new_dist</span><span class="op">(</span>ddist<span class="op">=</span><span class="va">dexp</span>, type<span class="op">=</span><span class="st">"continous"</span>, name<span class="op">=</span><span class="st">"exponential"</span>, supp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">new_dist</span><span class="op">(</span>ddist<span class="op">=</span><span class="va">dexp</span>, type<span class="op">=</span><span class="st">"continuous"</span>, name<span class="op">=</span><span class="st">"exponential"</span>, supp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y</span>,type<span class="op">=</span><span class="st">"b"</span>,pch<span class="op">=</span><span class="fl">16</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in x$qdist(0.001):</span> attempt to apply non-function</span>
+<span class="r-plt img"><img src="new_dist-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu">new_dist</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y</span><span class="op">+</span><span class="va">z</span>,type<span class="op">=</span><span class="st">"l"</span>,col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
